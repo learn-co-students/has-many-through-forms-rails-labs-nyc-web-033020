@@ -1,0 +1,9 @@
+
+<%= form_for @comment do |f| %>
+  <%= f.label :users %>
+  <%= f.collection_select :user_ids, User.all, :id, :username %>
+  <%= f.fields_for :users, post.users.build do |u| %>
+    <%= u.text_field :username %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
