@@ -1,1 +1,34 @@
+<h1>Write a New Post:</h1>
 
+<%= form_for @post do |f| %>
+  <%= f.label "Title" %>
+  <%= f.text_field :title %><br/>
+  <%= f.label "Content" %><br/>
+  <%= f.text_area :content %><br/>
+
+      <%# f.collection_check_boxes is element type %>
+      <%# :category_ids is key in post_params %>
+      
+      <%# Category.all provides data boxes -- QQ if there are... %>
+      <%# ... no categories does this show up on screen? %>
+
+      <%# :id is data sent as param w/ category choice %>
+      <%# :name is data displayed next to each category box %>
+
+      <%# note: params will have: :category_ids=> [1,2,3] %>
+  <%= f.label "Choose Categories" %><br/> 
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br/>
+  <br/>
+  <%= f.label "Create Category" %><br/>
+  <%= f.fields_for :categories, post.categories.build do |categories_fields| %>
+    <%= categories_fields.text_field :name %> 
+  <% end %>
+  <%= f.submit %>
+<% end %>  <%# note this has to be w/o equals sign %>
+
+<% if false %>
+
+#form should allow assigning categories to post
+## each category --> new post_category record w/ post_id and category_id
+
+<% end %>
